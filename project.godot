@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Mob",
+"language": "GDScript",
+"path": "res://Mob.gd"
+} ]
+_global_script_class_icons={
+"Mob": "res://art/enemyWalking_1.png"
+}
+
 [application]
 
 config/name="Your First Game"

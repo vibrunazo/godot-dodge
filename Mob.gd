@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Mob, "res://art/enemyWalking_1.png"
+
 export var min_speed = 150
 export var max_speed = 250
 
