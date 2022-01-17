@@ -32,7 +32,8 @@ func _on_ScoreTimer_timeout():
 	print("score: %d" % score)
 
 func _on_MobTimer_timeout():
-	print('mob timing')
+	$MobTimer.wait_time = clamp(2 - score * 0.02, 0.4, 2)
+	print('mob timer: %f' % $MobTimer.wait_time)
 	# Choose a random location on Path2D
 	$MobPath/MobSpawnLocation.offset = randi()
 	# Create a Mob instance and add it to the scene
