@@ -13,6 +13,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity := Vector2() # The player's movement vector
+	velocity = apply_input(velocity)
+	move(velocity, delta)
+	animate(velocity)
+#	print("vel: %d, %d" % [velocity.x, velocity.y]) 
+
+func apply_input(velocity):
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("ui_left"):
@@ -21,15 +27,21 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
+	return velocity
+
+func move(velocity, delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
-#	print("vel: %d, %d" % [velocity.x, velocity.y])
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
+
+func animate(velocity):
+	if velocity.length() > 0:
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
+	
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.flip_v = false
