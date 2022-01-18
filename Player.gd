@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Player, "res://art/playerGrey_walk2.png"
+
 signal hit
 
 export var speed = 400 # how fast the player will move in pixels/sec
@@ -60,5 +62,6 @@ func _on_Player_body_entered(body):
 	
 func start(pos):
 	position = pos
+	$Trail.restart()
 	show()
 	$CollisionShape2D.disabled = false

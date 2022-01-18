@@ -37,7 +37,7 @@ func _on_ScoreTimer_timeout():
 	$HUD.update_score(score)
 
 func _on_MobTimer_timeout():
-	$MobTimer.wait_time = clamp(2 - score * 0.02, 0.4, 2)
+	$MobTimer.wait_time = clamp(2 - score * 0.02, 0.2, 2)
 	print('mob timer: %f' % $MobTimer.wait_time)
 	# Choose a random location on Path2D
 	$MobPath/MobSpawnLocation.offset = randi()

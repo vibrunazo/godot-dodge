@@ -13,16 +13,22 @@ _global_script_classes=[ {
 "class": "Mob",
 "language": "GDScript",
 "path": "res://Mob.gd"
+}, {
+"base": "Area2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player.gd"
 } ]
 _global_script_class_icons={
-"Mob": "res://art/enemyWalking_1.png"
+"Mob": "res://art/enemyWalking_1.png",
+"Player": "res://art/playerGrey_walk2.png"
 }
 
 [application]
 
 config/name="Your First Game"
 run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://art/playerGrey_walk2.png"
 
 [display]
 
