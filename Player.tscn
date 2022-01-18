@@ -20,7 +20,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 27.0
+radius = 24.0
 height = 14.0
 
 [sub_resource type="Gradient" id=6]
