@@ -5,7 +5,6 @@ var score = 0
 
 func _ready():
 	randomize()
-	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -15,12 +14,15 @@ func _ready():
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_game_over()
 	print("game over")
 
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$HUD.update_score(score)
+	$HUD.show_message("Get Ready!")
 
 func _on_StartTimer_timeout():
 	print('start timer')
@@ -29,7 +31,7 @@ func _on_StartTimer_timeout():
 
 func _on_ScoreTimer_timeout():
 	score += 1
-	print("score: %d" % score)
+	$HUD.update_score(score)
 
 func _on_MobTimer_timeout():
 	$MobTimer.wait_time = clamp(2 - score * 0.02, 0.4, 2)

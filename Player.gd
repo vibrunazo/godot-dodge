@@ -9,7 +9,7 @@ var screen_size # size of the game window
 func _ready():
 	screen_size = get_viewport_rect().size
 	print("speed is %d, screen_size is %d, %d" % [speed, screen_size.x, screen_size.y])
-#	hide()
+	hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
