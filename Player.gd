@@ -6,6 +6,7 @@ signal hit
 
 export var speed = 400 # how fast the player will move in pixels/sec
 var screen_size # size of the game window
+var target := Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +14,11 @@ func _ready():
 	print("speed is %d, screen_size is %d, %d" % [speed, screen_size.x, screen_size.y])
 	hide()
 
-
+func _input(event):
+	if event is InputEventScreenTouch && event.pressed:
+		print('input event: %s' % event.as_text())
+		target = event.position
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity := Vector2() # The player's movement vector
@@ -23,14 +28,16 @@ func _process(delta):
 #	print("vel: %d, %d" % [velocity.x, velocity.y]) 
 
 func apply_input(velocity):
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
+	if position.distance_to(target) > 10:
+		velocity = target - position
+#	if Input.is_action_pressed("ui_right"):
+#		velocity.x += 1
+#	if Input.is_action_pressed("ui_left"):
+#		velocity.x -= 1
+#	if Input.is_action_pressed("ui_down"):
+#		velocity.y += 1
+#	if Input.is_action_pressed("ui_up"):
+#		velocity.y -= 1
 	return velocity
 
 func move(velocity, delta):
@@ -62,6 +69,7 @@ func _on_Player_body_entered(body):
 	
 func start(pos):
 	position = pos
+	target = pos
 	$Trail.restart()
 	show()
 	$CollisionShape2D.disabled = false
