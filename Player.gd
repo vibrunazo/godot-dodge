@@ -11,12 +11,13 @@ var target := Vector2()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	print("speed is %d, screen_size is %d, %d" % [speed, screen_size.x, screen_size.y])
 	hide()
 
 func _input(event):
 	if event is InputEventScreenTouch && event.pressed:
-		print('input event: %s' % event.as_text())
+#		print('input event: %s' % event.as_text())
+		target = event.position
+	if event is InputEventScreenDrag:
 		target = event.position
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,18 +27,24 @@ func _process(delta):
 	move(velocity, delta)
 	animate(velocity)
 #	print("vel: %d, %d" % [velocity.x, velocity.y]) 
+#	update()
 
-func apply_input(velocity):
-	if position.distance_to(target) > 10:
+#func _draw():
+#	draw_line(Vector2(0, 0), target - position, Color.red, 5)
+
+func apply_input(velocity := Vector2()):
+	if Input.is_action_pressed("ui_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("ui_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("ui_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("ui_up"):
+		velocity.y -= 1
+	if position.distance_to(target) > 10 and velocity.length() == 0:
 		velocity = target - position
-#	if Input.is_action_pressed("ui_right"):
-#		velocity.x += 1
-#	if Input.is_action_pressed("ui_left"):
-#		velocity.x -= 1
-#	if Input.is_action_pressed("ui_down"):
-#		velocity.y += 1
-#	if Input.is_action_pressed("ui_up"):
-#		velocity.y -= 1
+	else:
+		target = position
 	return velocity
 
 func move(velocity, delta):

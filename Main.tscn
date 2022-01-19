@@ -19,7 +19,7 @@ Mob = ExtResource( 3 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.286275, 0.184314, 0.458824, 1 )
+color = Color( 0.145098, 0.0941176, 0.180392, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
